@@ -34,7 +34,11 @@ const initialState: GridState = {
  * @param {GridAction} action
  * @returns {GridState}
  */
-export function gridReducer(state: GridState = initialState, action: GridAction): GridState {
+export function gridReducer(state: GridState = initialState, action?: GridAction): GridState {
+  if (!action) {
+    return state;
+  }
+
   switch (action.type) {
     case ResetGame.TYPE:
       return {
