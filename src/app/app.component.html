@@ -3,7 +3,7 @@
     <div>
       <div class="game-status">
         <div *ngIf="gameOver">
-          <h1>Player {{playerTurn}} has won!</h1> :
+          <h1>Player {{playerTurn}} has won!</h1>
         </div>
         <div *ngIf="!gameOver">
           <h1>Player {{playerTurn}}'s Turn</h1>
@@ -16,7 +16,7 @@
     <table class='grid-table'>
       <tbody>
       <tr class="grid-row" *ngFor="let row of rows">
-        <td *ngFor="let column of columns"
+        <td id="column-{{column}}-row-{{row}}" *ngFor="let column of columns"
             (click)="addDisc(column)"
             class="grid-disc grid-disc-player-{{getPlayerNumber(getCell(column, row).usedAtTurn)}}">
           <div class="grid-disc-circle {{gameOver ? ' game-over' : ''}}"></div>
