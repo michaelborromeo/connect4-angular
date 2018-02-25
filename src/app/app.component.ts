@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
 import {Store, select} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
-import {INCREMENT, DECREMENT, RESET} from './store/counter';
-
-interface AppState {
-  count: number;
-}
+import {GRID_COLUMNS, GRID_ROWS} from './store/grid';
+import {AddDisc, ResetGame, Grid, Cell} from './store/grid.types';
+import {AppState} from './app.module';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +11,44 @@ interface AppState {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-
-  count$: Observable<number>;
+  grid: Grid;
+  gameOver: boolean;
+  playerTurn: number;
+  readonly rows: Array<number> = _.range(GRID_ROWS).reverse();
+  readonly columns: Array<number> = _.range(GRID_COLUMNS);
 
   constructor(private store: Store<AppState>) {
-    this.count$ = store.pipe(select('count'));
+    store.pipe(select(this.selectState))
+      .subscribe(this.updateState);
   }
 
-  increment() {
-    this.store.dispatch({type: INCREMENT});
+  selectState = (state: AppState): any => {
+    return {
+      grid: state.grid.grid,
+      gameOver: state.grid.gameOver,
+      playerTurn: this.getPlayerNumber(state.grid.turn)
+    };
+  };
+
+  updateState = (state: any): any => {
+    this.grid = state.grid;
+    this.gameOver = state.gameOver;
+    this.playerTurn = state.playerTurn;
+  };
+
+  resetGame(): void {
+    this.store.dispatch(new ResetGame());
   }
 
-  decrement() {
-    this.store.dispatch({type: DECREMENT});
+  addDisc(column: number): void {
+    this.store.dispatch(new AddDisc(column));
   }
 
-  reset() {
-    this.store.dispatch({type: RESET});
+  getPlayerNumber(usedAtTurn: number) {
+    return (usedAtTurn % 2) + 1;
+  }
+
+  getCell(column: number, row: number): Cell {
+    return this.grid[column][row];
   }
 }

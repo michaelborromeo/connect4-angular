@@ -1,9 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {StoreModule} from '@ngrx/store';
-import {counterReducer} from './store/counter';
-
 import {AppComponent} from './app.component';
+import {gridReducer} from './store/grid';
+import {GridState} from './store/grid.types';
+
+export interface AppState {
+  grid: GridState;
+}
 
 @NgModule({
   declarations: [
@@ -11,7 +15,7 @@ import {AppComponent} from './app.component';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({count: counterReducer})
+    StoreModule.forRoot({grid: gridReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
