@@ -1,7 +1,7 @@
 <div class="app">
   <header>
     <div>
-      <div class="game-status">
+      <div class="game-status player-status-{{playerTurn}}">
         <div *ngIf="gameOver">
           <h1>Player {{playerTurn}} has won!</h1>
         </div>

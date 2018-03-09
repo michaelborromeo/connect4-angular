@@ -4,6 +4,7 @@
   margin-top: 25px;
   background-color: dodgerblue;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .grid-row {
@@ -33,5 +34,16 @@
 }
 
 .grid-disc-player-2 .grid-disc-circle {
+  background-color: red;
+}
+
+.game-status {
+}
+
+.player-status-1 {
+  background-color: yellow;
+}
+
+.player-status-2 {
   background-color: red;
 }

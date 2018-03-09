@@ -39,7 +39,7 @@ describe('AppComponent', () => {
 
     fixture.whenStable().then(() => {
       expect(store.dispatch).toHaveBeenCalledWith(new AddDisc(1));
-      // also check if the class for the cell has been updated
+      // TODO also check if the class for the cell has been updated
     });
   }));
 
