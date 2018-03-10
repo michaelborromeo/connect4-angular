@@ -4,6 +4,8 @@ import {StoreModule} from '@ngrx/store';
 import {AppComponent} from './app.component';
 import {gridReducer} from './store/grid';
 import {GridState} from './store/grid.types';
+import {HttpClientModule} from '@angular/common/http';
+import {GameService} from './services/game.service';
 
 export interface AppState {
   grid: GridState;
@@ -15,9 +17,10 @@ export interface AppState {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     StoreModule.forRoot({grid: gridReducer})
   ],
-  providers: [],
+  providers: [GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
