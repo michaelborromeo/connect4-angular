@@ -25,20 +25,6 @@ export function savedGamesReducer(state: SavedGamesState = initialState,
         loadedGame: state.loadedGame
       };
 
-    case SaveGame.TYPE:
-      const newGame: Game = {
-        id: action.id,
-        timestamp: action.timestamp,
-        winningPlayer: action.winningPlayer,
-        numberOfTurns: action.numberOfTurns,
-        grid: action.grid
-      };
-
-      return {
-        games: [...state.games, newGame],
-        loadedGame: state.loadedGame
-      };
-
     case LoadGame.TYPE:
       // find the game to be loaded
       for (let i = 0; i < state.games.length; i++) {

@@ -42,6 +42,10 @@ export class AppComponent {
   };
 
   updateState = (state: any): any => {
+
+    // TODO check if the game is over (this.gameOver !== state.gameOver && state.gameOver)
+    // if so then call the game service to save the game, then refresh the games
+
     this.grid = state.grid;
     this.gameOver = state.gameOver;
     this.playerTurn = state.playerTurn;

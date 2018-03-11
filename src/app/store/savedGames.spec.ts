@@ -1,6 +1,6 @@
 import {savedGamesReducer} from './savedGames';
 import {Game} from '../services/game.service.types';
-import {DeleteGame, LoadGame, RefreshGames, SaveGame} from './savedGames.types';
+import {DeleteGame, LoadGame, RefreshGames} from './savedGames.types';
 
 describe('savedGamesReducer', () => {
   it('should set the initial state', () => {
@@ -24,25 +24,6 @@ describe('savedGamesReducer', () => {
 
     expect(newState.games.length).toEqual(1);
     expect(newState.games[0]).toEqual(games[0]);
-    expect(newState.loadedGame).toBeNull();
-  });
-
-  it('should save a game', () => {
-    const game: Game = {
-      id: 1,
-      timestamp: new Date(),
-      winningPlayer: 0,
-      numberOfTurns: 2,
-      grid: []
-    };
-
-    const state = savedGamesReducer();
-    const newState = savedGamesReducer(state,
-      new SaveGame(game.id, game.timestamp, game.winningPlayer, game.numberOfTurns,
-        game.grid));
-
-    expect(newState.games.length).toEqual(1);
-    expect(newState.games[0]).toEqual(game);
     expect(newState.loadedGame).toBeNull();
   });
 

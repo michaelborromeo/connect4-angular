@@ -14,20 +14,6 @@ export class RefreshGames implements Action {
 }
 
 /**
- * Action to save a game (e.g. after a game is finished, and the server has acknowledged
- * the saved game).
- */
-export class SaveGame implements Action {
-  static readonly TYPE = 'SAVE_GAME';
-  readonly type = SaveGame.TYPE;
-
-  constructor(public id: number, public timestamp: Date, public winningPlayer: number,
-    public numberOfTurns: number,
-    public grid: Grid) {
-  }
-}
-
-/**
  * Action to load a game.
  */
 export class LoadGame implements Action {
@@ -53,7 +39,7 @@ export class DeleteGame implements Action {
 /**
  * The available saved games actions.
  */
-export type SavedGamesAction = SaveGame | LoadGame | DeleteGame | RefreshGames;
+export type SavedGamesAction = LoadGame | DeleteGame | RefreshGames;
 
 /**
  * The grid state.
