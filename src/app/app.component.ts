@@ -28,7 +28,7 @@ export class AppComponent {
     gameService.getAllGames().subscribe(games => {
       this.games = JSON.stringify(games);
     }, error => {
-      console.log(JSON.stringify(error))
+      console.error(JSON.stringify(error));
     });
 
   }

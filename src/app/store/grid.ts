@@ -1,5 +1,12 @@
-import {Action} from '@ngrx/store';
-import {AddDisc, Cell, Direction, Grid, GridAction, GridState, ResetGame} from './grid.types';
+import {
+  AddDisc,
+  Cell,
+  Direction,
+  Grid,
+  GridAction,
+  GridState,
+  ResetGame
+} from './grid.types';
 
 export const GRID_ROWS = 6;
 export const GRID_COLUMNS = 7;
@@ -34,7 +41,9 @@ const initialState: GridState = {
  * @param {GridAction} action
  * @returns {GridState}
  */
-export function gridReducer(state: GridState = initialState, action?: GridAction): GridState {
+export function gridReducer(state: GridState = initialState,
+  action?: GridAction): GridState {
+
   if (!action) {
     return state;
   }
@@ -89,8 +98,10 @@ function createGrid(oldGrid?: Grid): Grid {
       const cell: Cell = {
         column: i,
         row: j,
-        // when a disc is placed in this cell, it will be marked with the turn it was used
-        // the player can be derived from the turn -- all even turns will be player 1, and odd for 2
+        // when a disc is placed in this cell, it will be marked with the turn it was
+        // used
+        // the player can be derived from the turn -- all even turns will be player 1,
+        // and odd for 2
         usedAtTurn: -1
       };
 
@@ -184,7 +195,8 @@ function isGameOver(grid: Grid, cell: Cell, turn: number): boolean {
  * @param discCountsByDirection
  * @returns {boolean}
  */
-function checkDirectionForWinner(grid: Grid, cell: Cell, turn: number, direction: Direction, discCountsByDirection: any): boolean {
+function checkDirectionForWinner(grid: Grid, cell: Cell, turn: number,
+  direction: Direction, discCountsByDirection: any): boolean {
   // get the coordinates for the cell we're checking
   const column: number = cell.column + direction.column;
   const row: number = cell.row + direction.row;
@@ -210,8 +222,10 @@ function checkDirectionForWinner(grid: Grid, cell: Cell, turn: number, direction
       return true;
     }
 
-    // recurse into this function with the adjacent cell as the new center going in the same direction
-    return checkDirectionForWinner(grid, {column, row, usedAtTurn: -1}, turn, direction, discCountsByDirection);
+    // recurse into this function with the adjacent cell as the new center going in the
+    // same direction
+    return checkDirectionForWinner(grid, {column, row, usedAtTurn: -1}, turn, direction,
+      discCountsByDirection);
   }
 
   return false;
