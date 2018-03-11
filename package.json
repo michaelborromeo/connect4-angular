@@ -24,9 +24,10 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^5.1.0",
     "core-js": "^2.4.1",
+    "lodash": "latest",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19",
-    "lodash": "latest"
+    "ts-mockito": "^2.3.0",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.0",

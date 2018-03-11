@@ -5,19 +5,32 @@ import {gridReducer} from './store/grid';
 import {AppState} from './app.module';
 import {AddDisc, ResetGame} from './store/grid.types';
 import {By} from '@angular/platform-browser';
+import {GameService} from './services/game.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {instance, mock, when} from 'ts-mockito';
+import {of} from 'rxjs/observable/of';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let store: Store<AppState>;
+  let gameService: GameService;
 
   beforeEach(async(() => {
+    // return mock games
+    gameService = mock(GameService);
+    when(gameService.getAllGames()).thenReturn(of([]));
+
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      providers: [
+        {provide: GameService, useValue: instance(gameService)}
+      ],
       imports: [
-        StoreModule.forRoot({grid: gridReducer})
+        StoreModule.forRoot({grid: gridReducer}),
+        HttpClientTestingModule
       ],
     }).compileComponents();
 
@@ -65,4 +78,11 @@ describe('AppComponent', () => {
       expect(fixture.debugElement.query(By.css('h1')).nativeElement.textContent).toContain('Player 1 has won');
     });
   }));
+
+  // TODO check that the games service calls saveGame() when a game is finished
+
+  // TODO check that a game is loaded properly when loadGame() is called
+
+  // TODO check that the games list component is present
+
 });

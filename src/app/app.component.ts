@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 import {GRID_COLUMNS, GRID_ROWS} from './store/grid';
 import {AddDisc, ResetGame, Grid, Cell} from './store/grid.types';
 import {AppState} from './app.module';
 import * as _ from 'lodash';
+import {GameService} from './services/game.service';
+import {Game} from './services/game.service.types';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +19,18 @@ export class AppComponent {
   readonly rows: Array<number> = _.range(GRID_ROWS).reverse();
   readonly columns: Array<number> = _.range(GRID_COLUMNS);
 
-  constructor(private store: Store<AppState>) {
+  games: string;
+
+  constructor(private store: Store<AppState>, private gameService: GameService) {
     store.pipe(select(this.selectState))
       .subscribe(this.updateState);
+
+    gameService.getAllGames().subscribe(games => {
+      this.games = JSON.stringify(games);
+    }, error => {
+      console.log(JSON.stringify(error))
+    });
+
   }
 
   selectState = (state: AppState): any => {

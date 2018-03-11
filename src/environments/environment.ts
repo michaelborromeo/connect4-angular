@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // gameServer: 'http://localhost:8080'
+  gameServer: 'http://connect4-api-jaapp.2gqfhmf5ap.us-east-1.elasticbeanstalk.com'
 };
