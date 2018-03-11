@@ -1,8 +1,7 @@
 import {
   DeleteGame,
   LoadGame,
-  RefreshGames, SavedGamesAction, SavedGamesState,
-  SaveGame
+  RefreshGames, SavedGamesAction, SavedGamesState
 } from './savedGames.types';
 import {Game} from '../services/game.service.types';
 
